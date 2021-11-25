@@ -1,3 +1,5 @@
+import '../styles/Player.css'
+
 function Player({playerName, listOfPlayers, updateListOfPlayers, index}) {
 
 
@@ -32,12 +34,9 @@ function Player({playerName, listOfPlayers, updateListOfPlayers, index}) {
     function removePlayer() {
 
         const updatedList = [...listOfPlayers]
-        console.log(index)
-        console.log(updatedList)
 
+        // As we don't have a proper key, we need to use this trick to keep consistence with keys in playersList
         updatedList.splice(index, 1, {playerName: 'PLAYER_REMOVED'})
-
-        console.log(updatedList);
 
         updateListOfPlayers(updatedList)
 
@@ -46,14 +45,14 @@ function Player({playerName, listOfPlayers, updateListOfPlayers, index}) {
     
     return (
 
-        <div>
+        <div className="player-container">
             <input 
             type='text' 
             placeholder="Joueur" 
             onChange={(e) => updatePlayer(e.target.value)}>
             </input>
 
-            {index > 0 && listOfPlayers.length > 1 && 
+            {index !== (listOfPlayers.length - 1) && 
                 <div 
                 className="remove-player-cross clickable"
                 onClick={removePlayer}
