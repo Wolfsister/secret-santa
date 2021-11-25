@@ -1,14 +1,6 @@
 import Player from "./Player"
 
 function PlayersList({listOfPlayers, updateListOfPlayers}) {
-
-
-    function generateKey() {
-
-        return Math.floor(Math.random() * 9999)
-        // const dateTime = new Date().getTime()
-        // return `${index}-${dateTime}`
-    }
     
     return (
 
