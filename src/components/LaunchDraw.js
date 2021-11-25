@@ -1,7 +1,7 @@
 
 
 
-function LaunchDraw({listOfPlayers, updateDrawList}) {
+function LaunchDraw({listOfPlayers, updateDrawList, updateDrawDisplayIndex}) {
 
 
 
@@ -18,6 +18,7 @@ function LaunchDraw({listOfPlayers, updateDrawList}) {
         console.log('generate draw')
         if (isDrawValid) {
 
+            updateDrawDisplayIndex(0)
             // shuffle array
             const draw = [...listOfPlayers]
             .filter((player => {
