@@ -1,5 +1,4 @@
 import '../styles/DrawDisplay.css'
-import { useState } from 'react'
 
 function DrawDisplay({listOfPlayers, drawList, drawDisplayIndex, updateDrawDisplayIndex}) {
 
@@ -35,7 +34,6 @@ function DrawDisplay({listOfPlayers, drawList, drawDisplayIndex, updateDrawDispl
         console.log([drawDisplayIndex, 2 *(drawList.length - 1), '----'])
 
         if (drawDisplayIndex === (2 *(drawList.length - 1))) {
-            console.log('derniere frame')
             updateDrawDisplayIndex(0)
         } else {
             updateDrawDisplayIndex(drawDisplayIndex + 1)
@@ -45,14 +43,14 @@ function DrawDisplay({listOfPlayers, drawList, drawDisplayIndex, updateDrawDispl
     const drawDisplayPerFrame = generateDrawDisplayPerFrame()
 
     return (
-        <div>
+        <div className="draw-display-container">
 
             {drawDisplayPerFrame.map((frame, index) => 
 
 
                 frame.callPlayerFrame ? 
                 
-                (<div key={index} className={"call-player-frame " + (drawDisplayIndex === index ? 'show' : 'hidden')}>
+                (<div key={index} className={"draw-frame call-player-frame " + (drawDisplayIndex === index ? 'show' : 'hidden')}>
 
                     {frame.playerName}, viens voir à qui tu dois offrir.
 
@@ -60,7 +58,7 @@ function DrawDisplay({listOfPlayers, drawList, drawDisplayIndex, updateDrawDispl
 
                 :
 
-                (<div key={index} className={"reveal-receiver-frame " + (drawDisplayIndex === index ? 'show' : 'hidden')}>
+                (<div key={index} className={"draw-frame reveal-receiver-frame " + (drawDisplayIndex === index ? 'show' : 'hidden')}>
 
                     {frame.playerName}, tu dois offrir à {frame.receiverName}.  
 

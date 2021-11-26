@@ -1,7 +1,12 @@
 .App {
   text-align: center;
+  padding: 30px;
 }
 
 .clickable {
   cursor: pointer;
+}
+
+div {
+  margin: 10px;
 }
