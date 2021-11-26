@@ -7,7 +7,9 @@ import {useState} from 'react'
 
 function App() {
 
-  const [listOfPlayers, updateListOfPlayers] = useState([{id: 1, playerName: ''}])
+  // const [listOfPlayers, updateListOfPlayers] = useState([{id: 1, playerName: ''}])
+  
+  const [listOfPlayers, updateListOfPlayers] = useState([{playerName: 'Candice'}, {playerName: 'Denis'}, {playerName: 'Paul'}, {playerName: ''}])
   const [drawList, updateDrawList] = useState([])
   const [drawDisplayIndex, updateDrawDisplayIndex] = useState(0)
 
@@ -17,8 +19,13 @@ function App() {
       <Header />
       <PlayersList listOfPlayers={listOfPlayers} updateListOfPlayers={updateListOfPlayers}/>
       <LaunchDraw listOfPlayers={listOfPlayers} updateDrawList={updateDrawList} updateDrawDisplayIndex={updateDrawDisplayIndex}/>
-      {drawList.length > 0 && <DrawDisplay listOfPlayers={listOfPlayers} drawList={drawList} drawDisplayIndex={drawDisplayIndex}/> }
-      {/* <DrawDisplay listOfPlayers={listOfPlayers} drawList={drawList} drawDisplayIndex={drawDisplayIndex}/> */}
+      {drawList.length > 0 && 
+        <DrawDisplay 
+        listOfPlayers={listOfPlayers} 
+        drawList={drawList} 
+        drawDisplayIndex={drawDisplayIndex}
+        updateDrawDisplayIndex={updateDrawDisplayIndex}/> 
+      }
     </div>
   );
 }

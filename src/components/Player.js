@@ -49,6 +49,7 @@ function Player({playerName, listOfPlayers, updateListOfPlayers, index}) {
             <input 
             type='text' 
             placeholder="Joueur" 
+            value={playerName}
             onChange={(e) => updatePlayer(e.target.value)}>
             </input>
 

@@ -1,0 +1,14 @@
+.hidden {
+    display: none;
+}
+
+.reveal-receiver-frame {
+    color: white;
+    background-color: red;
+}
+
+.call-player-frame {
+    color: white;
+    background-color: blue;
+
+}

@@ -1,8 +1,7 @@
+import '../styles/DrawDisplay.css'
+import { useState } from 'react'
 
-
-function DrawDisplay({listOfPlayers, drawList, drawDisplayIndex}) {
-
-    console.log(drawDisplayIndex)
+function DrawDisplay({listOfPlayers, drawList, drawDisplayIndex, updateDrawDisplayIndex}) {
 
 
     function generateDrawDisplayPerFrame() {
@@ -31,18 +30,29 @@ function DrawDisplay({listOfPlayers, drawList, drawDisplayIndex}) {
         return drawDisplayPerFrame
     }
 
-    const drawDisplayPerFrame = generateDrawDisplayPerFrame()
+    function goToNextFrame() {
 
-    console.log(drawDisplayPerFrame)
+        console.log([drawDisplayIndex, 2 *(drawList.length - 1), '----'])
+
+        if (drawDisplayIndex === (2 *(drawList.length - 1))) {
+            console.log('derniere frame')
+            updateDrawDisplayIndex(0)
+        } else {
+            updateDrawDisplayIndex(drawDisplayIndex + 1)
+        }
+    }
+
+    const drawDisplayPerFrame = generateDrawDisplayPerFrame()
 
     return (
         <div>
 
-            {drawDisplayPerFrame.map((frame) => 
+            {drawDisplayPerFrame.map((frame, index) => 
 
-                frame.callPlayerFrame ?
+
+                frame.callPlayerFrame ? 
                 
-                (<div className="call-player-frame">
+                (<div key={index} className={"call-player-frame " + (drawDisplayIndex === index ? 'show' : 'hidden')}>
 
                     {frame.playerName}, viens voir à qui tu dois offrir.
 
@@ -50,12 +60,17 @@ function DrawDisplay({listOfPlayers, drawList, drawDisplayIndex}) {
 
                 :
 
-                (<div className="reveal-receiver-frame">
+                (<div key={index} className={"reveal-receiver-frame " + (drawDisplayIndex === index ? 'show' : 'hidden')}>
 
                     {frame.playerName}, tu dois offrir à {frame.receiverName}.  
 
                 </div>) 
             )}
+
+
+{/* TODO: mieux gerer comportement si derniere frame */}
+
+            <button onClick={goToNextFrame}>Ok</button>
 
         
 
