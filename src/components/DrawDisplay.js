@@ -14,7 +14,7 @@ function DrawDisplay({listOfPlayers, drawList, drawDisplayIndex, updateDrawDispl
 
             drawDisplayPerFrame.push({playerName: player.playerName, callPlayerFrame: true})
 
-        
+
             const receiverName = drawList.find((draw) => draw.giver === player.playerName).receiver
 
             drawDisplayPerFrame.push(
@@ -31,9 +31,7 @@ function DrawDisplay({listOfPlayers, drawList, drawDisplayIndex, updateDrawDispl
 
     function goToNextFrame() {
 
-        console.log([drawDisplayIndex, 2 *(drawList.length - 1), '----'])
-
-        if (drawDisplayIndex === (2 *(drawList.length - 1))) {
+        if (drawDisplayIndex === (2 * (drawList.length) - 1)) {
             updateDrawDisplayIndex(0)
         } else {
             updateDrawDisplayIndex(drawDisplayIndex + 1)
@@ -41,6 +39,8 @@ function DrawDisplay({listOfPlayers, drawList, drawDisplayIndex, updateDrawDispl
     }
 
     const drawDisplayPerFrame = generateDrawDisplayPerFrame()
+
+    console.log(drawDisplayPerFrame)
 
     return (
         <div className="draw-display-container">
@@ -69,9 +69,7 @@ function DrawDisplay({listOfPlayers, drawList, drawDisplayIndex, updateDrawDispl
 {/* TODO: mieux gerer comportement si derniere frame */}
 
             <button onClick={goToNextFrame}>Ok</button>
-
-        
-
+            
         </div>
     )
 
