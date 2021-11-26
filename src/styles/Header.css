@@ -1,0 +1,13 @@
+.header {
+
+    background-color: red;
+    font-size: 2em;
+    height: 4em;
+    margin-top: 0;
+    
+}
+
+.header-title {
+    color: green;
+    margin: auto;
+}
