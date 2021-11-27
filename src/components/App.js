@@ -1,31 +1,35 @@
 import '../styles/App.css';
 import Header from './Header'
-import PlayersList from './PlayersList';
+import UsersList from './UsersList';
 import LaunchDraw from './LaunchDraw';
 import DrawDisplay from './DrawDisplay';
 import {useState, useEffect} from 'react'
 
 function App() {
 
-  const savedListPlayers = localStorage.getItem('savedList')
-  const [listOfPlayers, updateListOfPlayers] = useState(savedListPlayers ? JSON.parse(savedListPlayers) : [{playerName: ''}])
+  document.title = 'Secret Santa'
+  
+
+  const savedListUsers = localStorage.getItem('savedList')
+  const [listOfUsers, updateListOfUsers] = useState(savedListUsers ? JSON.parse(savedListUsers) : [{userName: ''}])
+  const [listOfUsersForDrawDisplay, updateListOfUsersForDrawDisplay] = useState([])
   const [drawList, updateDrawList] = useState([])
   const [drawDisplayIndex, updateDrawDisplayIndex] = useState(0)
 
   useEffect(() => {
 
-    localStorage.setItem('savedList', JSON.stringify(listOfPlayers))
+    localStorage.setItem('savedList', JSON.stringify(listOfUsers))
 
-  }, [listOfPlayers])
+  }, [listOfUsers])
 
   return (
     <div className="App">
       <Header />
-      <PlayersList listOfPlayers={listOfPlayers} updateListOfPlayers={updateListOfPlayers}/>
-      <LaunchDraw listOfPlayers={listOfPlayers} updateDrawList={updateDrawList} updateDrawDisplayIndex={updateDrawDisplayIndex}/>
+      <UsersList listOfUsers={listOfUsers} updateListOfUsers={updateListOfUsers}/>
+      <LaunchDraw listOfUsers={listOfUsers} updateDrawList={updateDrawList} updateDrawDisplayIndex={updateDrawDisplayIndex} updateListOfUsersForDrawDisplay={updateListOfUsersForDrawDisplay}/>
       {drawList.length > 0 && 
         <DrawDisplay 
-        listOfPlayers={listOfPlayers} 
+        listOfUsersForDrawDisplay={listOfUsersForDrawDisplay} 
         drawList={drawList} 
         drawDisplayIndex={drawDisplayIndex}
         updateDrawDisplayIndex={updateDrawDisplayIndex}/> 

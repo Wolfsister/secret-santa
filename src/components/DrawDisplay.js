@@ -1,28 +1,30 @@
 import '../styles/DrawDisplay.css'
 
-function DrawDisplay({listOfPlayers, drawList, drawDisplayIndex, updateDrawDisplayIndex}) {
+function DrawDisplay({listOfUsersForDrawDisplay, drawList, drawDisplayIndex, updateDrawDisplayIndex}) {
 
 
     function generateDrawDisplayPerFrame() {
 
+
         const drawDisplayPerFrame = [];
-        listOfPlayers
-        .filter((player => {
-            return !['', 'PLAYER_REMOVED'].includes(player.playerName) 
+        listOfUsersForDrawDisplay
+        .filter((user => {
+            return !['', 'PLAYER_REMOVED'].includes(user.userName) 
         }))
-        .map((player) => {
+        .map((user) => {
 
-            drawDisplayPerFrame.push({playerName: player.playerName, callPlayerFrame: true})
+            drawDisplayPerFrame.push({userName: user.userName, callUserFrame: true})
 
-
-            const receiverName = drawList.find((draw) => draw.giver === player.playerName).receiver
+            const receiverName = drawList.find((draw) => draw.giver === user.userName).receiver
 
             drawDisplayPerFrame.push(
-                {playerName: player.playerName, 
-                    callPlayerFrame: false, 
+                {userName: user.userName, 
+                    callUserFrame: false, 
                     receiverName: receiverName
                 }
             )
+
+            return
 
         })
 
@@ -38,9 +40,8 @@ function DrawDisplay({listOfPlayers, drawList, drawDisplayIndex, updateDrawDispl
         }
     }
 
-    const drawDisplayPerFrame = generateDrawDisplayPerFrame()
 
-    console.log(drawDisplayPerFrame)
+    const drawDisplayPerFrame = generateDrawDisplayPerFrame()
 
     return (
         <div className="draw-display-container">
@@ -48,11 +49,11 @@ function DrawDisplay({listOfPlayers, drawList, drawDisplayIndex, updateDrawDispl
             {drawDisplayPerFrame.map((frame, index) => 
 
 
-                frame.callPlayerFrame ? 
+                frame.callUserFrame ? 
                 
-                (<div key={index} className={"draw-frame call-player-frame " + (drawDisplayIndex === index ? 'show' : 'hidden')}>
+                (<div key={index} className={"draw-frame call-user-frame " + (drawDisplayIndex === index ? 'show' : 'hidden')}>
 
-                    {frame.playerName}, viens voir à qui tu dois offrir.
+                    {frame.userName}, viens voir à qui tu dois offrir.
 
                 </div>)
 
@@ -60,7 +61,7 @@ function DrawDisplay({listOfPlayers, drawList, drawDisplayIndex, updateDrawDispl
 
                 (<div key={index} className={"draw-frame reveal-receiver-frame " + (drawDisplayIndex === index ? 'show' : 'hidden')}>
 
-                    {frame.playerName}, tu dois offrir à {frame.receiverName}.  
+                    {frame.userName}, tu dois offrir à {frame.receiverName}.  
 
                 </div>) 
             )}
